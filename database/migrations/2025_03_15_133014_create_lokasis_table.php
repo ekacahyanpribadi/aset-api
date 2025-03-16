@@ -19,7 +19,6 @@ return new class extends Migration
             $table->dateTime('lokasi_ins_date');
             $table->string('lokasi_upd_user');
             $table->dateTime('lokasi_upd_date');
-            $table->timestamps();
         });
     }
 
