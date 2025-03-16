@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Lokasi;
+use App\Models\Tipe;
 
-class LokasiController extends Controller
+class TipeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +18,12 @@ class LokasiController extends Controller
             Controller::respResult(400, "Token request invalid!");
             exit;
         }
-
-        //$lokasi = Lokasi::get(); //all lokasi
-        $lokasi = Lokasi::where('lokasi_status', '=', '1')
-            ->orderBy('lokasi_ins_date','asc')
+        
+        $tipe = Tipe::where('tipe_status', '=', '1')
+            ->orderBy('tipe_ins_date','asc')
             ->get();
         //return response()->json($kategori);        
-        Controller::respResult(200, 'Success Get Lokasi Data', $lokasi);
+        Controller::respResult(200, 'Success Get Tipe Data', $tipe);
         return;
     }
 
@@ -40,25 +39,23 @@ class LokasiController extends Controller
             exit;
         }
 
-        $lokasi = new Lokasi();
-        $lokasi_id = Controller::getPk();
-        $lokasi->lokasi_id = $lokasi_id;
-        $lokasi->lokasi = $request->lokasi;
-        $lokasi->lokasi_status = $request->lokasi_status;
-        $lokasi->lokasi_ins_user = $request->lokasi_ins_user;
-        $lokasi->lokasi_ins_date = Controller::dateNow();
-        $lokasi->lokasi_upd_user = $request->lokasi_upd_user;
-        $lokasi->lokasi_upd_date = $request->lokasi_upd_date;
+        $tipe = new Tipe();
+        $tipe_id = Controller::getPk();
+        $tipe->tipe_id = $tipe_id;
+        $tipe->tipe = $request->tipe;
+        $tipe->tipe_status = $request->tipe_status;
+        $tipe->tipe_ins_user = $request->tipe_ins_user;
+        $tipe->tipe_ins_date = Controller::dateNow();
 
-        $cekLokasi = Lokasi::where('lokasi', '=', $request->lokasi);
-        if ($cekLokasi->exists()) {
-            Controller::respResult(400, 'Lokasi: ' . $request->lokasi . ' is exist', );
+        $cekTipe = Tipe::where('tipe', '=', $request->produsen);
+        if ($cekTipe->exists()) {
+            Controller::respResult(400, 'Tipe: ' . $request->tipe . ' is exist', );
             exit;
         } else {
-            $lokasi->save();
+            $tipe->save();
         }
 
-        Controller::respResult(200, 'Success Insert Lokasi ID: ' . $lokasi_id, $lokasi);
+        Controller::respResult(200, 'Success Insert Tipe ID: ' . $tipe_id, $tipe);
         return;
     }
 
@@ -75,9 +72,9 @@ class LokasiController extends Controller
         }
         //
 
-        $lokasi = Lokasi::find($id);
+        $tipe = Tipe::find($id);
         //return response()->json($kategori);
-        Controller::respResult(200, 'Success Show Lokasi ID:' . $id, $lokasi);
+        Controller::respResult(200, 'Success Show Tipe ID:' . $id, $tipe);
         exit;
     }
 
@@ -93,15 +90,15 @@ class LokasiController extends Controller
             exit;
         }
 
-        $lokasi = Lokasi::find($id);
-        $lokasi->lokasi = $request->lokasi;
-        $lokasi->lokasi_status = $request->lokasi_status;
-        $lokasi->lokasi_upd_user = $request->lokasi_upd_user;
-        $lokasi->lokasi_upd_date = Controller::dateNow();
-        $lokasi->save();
+        $tipe = Tipe::find($id);
+        $tipe->tipe = $request->tipe;
+        $tipe->tipe_status = $request->tipe_status;
+        $tipe->tipe_upd_user = $request->tipe_upd_user;
+        $tipe->tipe_upd_date = Controller::dateNow();
+        $tipe->save();
 
         //return response()->json($kategori);
-        Controller::respResult(200, 'Success Update Lokasi ID: ' . $id, $lokasi);
+        Controller::respResult(200, 'Success Update Tipe ID: ' . $id, $tipe);
         return;
     }
 
@@ -117,9 +114,9 @@ class LokasiController extends Controller
             exit;
         }
 
-        Lokasi::destroy($id);
+        Tipe::destroy($id);
         //return response()->json(['message' => 'Deleted']);
-        Controller::respResult(200, 'Success Delete Lokasi ID: ' . $id);
+        Controller::respResult(200, 'Success Delete Tipe ID: ' . $id);
         return;
     }
 }

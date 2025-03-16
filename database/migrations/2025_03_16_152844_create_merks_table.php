@@ -15,10 +15,10 @@ return new class extends Migration
             $table->string('merk_id');
             $table->string('merk');
             $table->string('merk_status');
-            $table->string('merk_ins_user');
-            $table->dateTime('merk_ins_date');
-            $table->string('merk_upd_user');
-            $table->dateTime('merk_upd_date');
+            $table->string('merk_ins_user')->nullable();
+            $table->dateTime('merk_ins_date')->nullable();
+            $table->string('merk_upd_user')->nullable();
+            $table->dateTime('merk_upd_date')->nullable();
         });
     }
 

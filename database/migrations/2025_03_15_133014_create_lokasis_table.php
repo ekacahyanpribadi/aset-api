@@ -15,10 +15,10 @@ return new class extends Migration
             $table->string('lokasi_id');
             $table->string('lokasi');
             $table->string('lokasi_status');
-            $table->string('lokasi_ins_user');
-            $table->dateTime('lokasi_ins_date');
-            $table->string('lokasi_upd_user');
-            $table->dateTime('lokasi_upd_date');
+            $table->string('lokasi_ins_user')->nullable();
+            $table->dateTime('lokasi_ins_date')->nullable();
+            $table->string('lokasi_upd_user')->nullable();
+            $table->dateTime('lokasi_upd_date')->nullable();
         });
     }
 

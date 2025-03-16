@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Lokasi;
+use App\Models\Produsen;
 
-class LokasiController extends Controller
+class ProdusenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +18,12 @@ class LokasiController extends Controller
             Controller::respResult(400, "Token request invalid!");
             exit;
         }
-
-        //$lokasi = Lokasi::get(); //all lokasi
-        $lokasi = Lokasi::where('lokasi_status', '=', '1')
-            ->orderBy('lokasi_ins_date','asc')
+        
+        $produsen = Produsen::where('produsen_status', '=', '1')
+            ->orderBy('produsen_ins_date','asc')
             ->get();
         //return response()->json($kategori);        
-        Controller::respResult(200, 'Success Get Lokasi Data', $lokasi);
+        Controller::respResult(200, 'Success Get Produsen Data', $produsen);
         return;
     }
 
@@ -40,25 +39,23 @@ class LokasiController extends Controller
             exit;
         }
 
-        $lokasi = new Lokasi();
-        $lokasi_id = Controller::getPk();
-        $lokasi->lokasi_id = $lokasi_id;
-        $lokasi->lokasi = $request->lokasi;
-        $lokasi->lokasi_status = $request->lokasi_status;
-        $lokasi->lokasi_ins_user = $request->lokasi_ins_user;
-        $lokasi->lokasi_ins_date = Controller::dateNow();
-        $lokasi->lokasi_upd_user = $request->lokasi_upd_user;
-        $lokasi->lokasi_upd_date = $request->lokasi_upd_date;
+        $produsen = new Produsen();
+        $produsen_id = Controller::getPk();
+        $produsen->produsen_id = $produsen_id;
+        $produsen->produsen = $request->produsen;
+        $produsen->produsen_status = $request->produsen_status;
+        $produsen->produsen_ins_user = $request->produsen_ins_user;
+        $produsen->produsen_ins_date = Controller::dateNow();
 
-        $cekLokasi = Lokasi::where('lokasi', '=', $request->lokasi);
-        if ($cekLokasi->exists()) {
-            Controller::respResult(400, 'Lokasi: ' . $request->lokasi . ' is exist', );
+        $cekProdusen = Produsen::where('produsen', '=', $request->produsen);
+        if ($cekProdusen->exists()) {
+            Controller::respResult(400, 'Produsen: ' . $request->produsen . ' is exist', );
             exit;
         } else {
-            $lokasi->save();
+            $produsen->save();
         }
 
-        Controller::respResult(200, 'Success Insert Lokasi ID: ' . $lokasi_id, $lokasi);
+        Controller::respResult(200, 'Success Insert Produsen ID: ' . $produsen_id, $produsen);
         return;
     }
 
@@ -75,9 +72,9 @@ class LokasiController extends Controller
         }
         //
 
-        $lokasi = Lokasi::find($id);
+        $produsen = Produsen::find($id);
         //return response()->json($kategori);
-        Controller::respResult(200, 'Success Show Lokasi ID:' . $id, $lokasi);
+        Controller::respResult(200, 'Success Show Produsen ID:' . $id, $produsen);
         exit;
     }
 
@@ -93,15 +90,15 @@ class LokasiController extends Controller
             exit;
         }
 
-        $lokasi = Lokasi::find($id);
-        $lokasi->lokasi = $request->lokasi;
-        $lokasi->lokasi_status = $request->lokasi_status;
-        $lokasi->lokasi_upd_user = $request->lokasi_upd_user;
-        $lokasi->lokasi_upd_date = Controller::dateNow();
-        $lokasi->save();
+        $produsen = Produsen::find($id);
+        $produsen->produsen = $request->produsen;
+        $produsen->produsen_status = $request->produsen_status;
+        $produsen->produsen_upd_user = $request->produsen_upd_user;
+        $produsen->produsen_upd_date = Controller::dateNow();
+        $produsen->save();
 
         //return response()->json($kategori);
-        Controller::respResult(200, 'Success Update Lokasi ID: ' . $id, $lokasi);
+        Controller::respResult(200, 'Success Update Produsen ID: ' . $id, $produsen);
         return;
     }
 
@@ -117,9 +114,9 @@ class LokasiController extends Controller
             exit;
         }
 
-        Lokasi::destroy($id);
+        Produsen::destroy($id);
         //return response()->json(['message' => 'Deleted']);
-        Controller::respResult(200, 'Success Delete Lokasi ID: ' . $id);
+        Controller::respResult(200, 'Success Delete Produsen ID: ' . $id);
         return;
     }
 }

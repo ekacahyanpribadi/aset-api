@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('penja_instansi');
             $table->string('penja_keterangan');
             $table->string('penja_status');
-            $table->string('penja_ins_user');
-            $table->dateTime('penja_ins_date');
-            $table->string('penja_upd_user');
-            $table->dateTime('penja_upd_date');
+            $table->string('penja_ins_user')->nullable();
+            $table->dateTime('penja_ins_date')->nullable();
+            $table->string('penja_upd_user')->nullable();
+            $table->dateTime('penja_upd_date')->nullable();
         });
     }
 
