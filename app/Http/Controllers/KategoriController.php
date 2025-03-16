@@ -22,10 +22,10 @@ class KategoriController extends Controller
 
         //$kategori = Kategori::get();
         $kategori = Kategori::where('kategori_status', '=', '1')
-            ->orderBy('kategori_ins_date','asc')
+            ->orderBy('kategori_ins_date', 'asc')
             ->get();
         //return response()->json($kategori);        
-        Controller::respResult(200, 'Success Get Data', $kategori);
+        Controller::respResult(200, 'Success Get Kategori Data', $kategori);
         return;
     }
 
@@ -64,7 +64,7 @@ class KategoriController extends Controller
             $kategori->save();
         }
 
-        Controller::respResult(200, 'Success Insert ID: ' . $kategori_id, $kategori);
+        Controller::respResult(200, 'Success Insert Kategori ID: ' . $kategori_id, $kategori);
         return;
     }
 
@@ -83,7 +83,7 @@ class KategoriController extends Controller
 
         $kategori = Kategori::find($id);
         //return response()->json($kategori);
-        Controller::respResult(200, 'Success Show ID:' . $id, $kategori);
+        Controller::respResult(200, 'Success Show Kategori ID: ' . $id, $kategori);
         exit;
     }
 
@@ -114,7 +114,7 @@ class KategoriController extends Controller
         $kategori->save();
 
         //return response()->json($kategori);
-        Controller::respResult(200, 'Success Update ID: ' . $id, $kategori);
+        Controller::respResult(200, 'Success Update Kategori ID: ' . $id, $kategori);
         return;
     }
 
@@ -132,9 +132,7 @@ class KategoriController extends Controller
 
         Kategori::destroy($id);
         //return response()->json(['message' => 'Deleted']);
-        Controller::respResult(200, 'Success Delete ID: ' . $id);
+        Controller::respResult(200, 'Success Delete Kategori ID: ' . $id);
         return;
     }
-
-
 }

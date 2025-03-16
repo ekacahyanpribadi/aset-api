@@ -60,6 +60,15 @@ abstract class Controller
         return $var;
     }
 
+    public function getAsetKode()
+    {
+        $var1 = date('YmdH');
+        $var2 = Controller::acakHuruf(4);
+        $var = $var1 . $var2;
+
+        return $var;
+    }
+
     public function dateNow()
     {
         date_default_timezone_set('Asia/Jakarta');
